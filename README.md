@@ -12,7 +12,7 @@
 
 6. Simulate sending data to this API: https://65e86fa34bb72f0a9c4f544a.mockapi.io/forms
 
-[Demo](https://multi-step-form.vercel.app)
+[Demo](https://multi-step-form-steel-phi.vercel.app/)
 
 ![demo screenshot](./demo.png)
 

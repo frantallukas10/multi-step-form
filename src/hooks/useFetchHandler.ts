@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { getErrorMessage } from '../utils/getErrorMessage';
 
 export const useFetchHandler = <T>(fetcher: () => Promise<T>) => {
   const [data, setData] = useState<T | null>(null);
@@ -10,12 +11,9 @@ export const useFetchHandler = <T>(fetcher: () => Promise<T>) => {
       try {
         const result = await fetcher();
         setData(result);
-      } catch (err) {
-        if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError(String(err));
-        }
+      } catch (error) {
+        const errorMessage = getErrorMessage(error);
+        setError(errorMessage);
       } finally {
         setLoading(false);
       }

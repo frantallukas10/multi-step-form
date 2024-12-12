@@ -62,6 +62,12 @@ export const FormField: FC<FormFieldProps> = ({ question }) => {
       control={control}
       rules={{
         required: question.isRequired ? `This field is required` : false,
+        ...(question.componentType === COMPONENT_TYPES.INPUT && {
+          min: {
+            value: 0,
+            message: 'Value must be greater than or equal to 0',
+          },
+        }),
       }}
       render={({ field, fieldState }) => (
         <FormControl

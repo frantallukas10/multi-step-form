@@ -9,7 +9,7 @@ export const getFormConfig = async (): Promise<FormConfig[]> => {
 };
 
 export const submitFormConfig = async (
-  data: Record<string, unknown>,
+  data: Record<string, string>,
 ): Promise<void> => {
   await axios.post(`${API_BASE_URL}/forms`, data);
 };

@@ -12,6 +12,7 @@ import { StepperNavigation } from './components/StepperNavigation';
 import { LoadingState } from './components/LoadingState';
 import { ErrorState } from './components/ErrorState';
 import { ModalMessage } from './components/ModalMessage';
+import { AxiosError } from 'axios';
 
 const formStyles = {
   display: 'flex',
@@ -82,15 +83,24 @@ export const StepperForm = () => {
   const onSubmit = async (data: Record<string, string>) => {
     try {
       await submitFormConfig(data);
+
       setModalState({
         open: true,
         message: 'Form submitted successfully!',
         severity: 'success',
       });
-    } catch {
+    } catch (error) {
+      const axiosError = error as AxiosError<{ message?: string }>;
+
+      const errorMessage =
+        axiosError.response?.data?.message ??
+        (typeof axiosError.response?.data === 'string'
+          ? axiosError.response.data
+          : 'Something went wrong!');
+
       setModalState({
         open: true,
-        message: 'Failed to submit form.',
+        message: errorMessage,
         severity: 'error',
       });
     }
